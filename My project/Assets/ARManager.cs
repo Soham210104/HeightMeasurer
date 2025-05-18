@@ -17,12 +17,11 @@ public class ARManager : MonoBehaviour
 
     void Start()
     {
-        heightText.text = "Lengtht: 0.00 cm";
+        heightText.text = "Length: 0.00 cm";
         raycastManager = Object.FindFirstObjectByType<ARRaycastManager>();
         lineRenderer.positionCount = 0;
     }
 
-    // 👉 Call this from the UI Button
     public void PlaceMarkerFromButton()
     {
         Vector2 centerScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -34,7 +33,6 @@ public class ARManager : MonoBehaviour
 
             if (!firstPlaced)
             {
-                // First tap – place foot marker
                 startMarker = Instantiate(markerPrefab, hitPose.position, Quaternion.identity);
                 lineRenderer.positionCount = 2;
                 lineRenderer.SetPosition(0, startMarker.transform.position);
@@ -43,7 +41,7 @@ public class ARManager : MonoBehaviour
             }
             else if (!heightMeasured)
             {
-                // Second tap – place head marker
+              
                 endMarker = Instantiate(markerPrefab, hitPose.position, Quaternion.identity);
                 lineRenderer.SetPosition(1, endMarker.transform.position);
                 heightMeasured = true;
@@ -57,7 +55,7 @@ public class ARManager : MonoBehaviour
 
     void Update()
     {
-        // Optional: show dynamic line if foot is placed but head is not
+        
         if (firstPlaced && !heightMeasured)
         {
             Vector2 centerScreen = new Vector2(Screen.width / 2f, Screen.height / 2f);
